@@ -25,6 +25,11 @@ class AuthService {
 
     logout(token) {
         // Implement logout logic, such as invalidating the token
+        // For simplicity, we'll store invalidated tokens in an array
+        if (!this.invalidatedTokens) {
+            this.invalidatedTokens = [];
+        }
+        this.invalidatedTokens.push(token);
     }
 
     async validateUser(username, password) {
