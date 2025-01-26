@@ -1,14 +1,12 @@
-import { Request, Response } from 'express';
-import ProductService from '../services/productService';
+const { Request, Response } = require('express');
+const ProductService = require('../services/productService');
 
 class ProductController {
-    private productService: ProductService;
-
     constructor() {
         this.productService = new ProductService();
     }
 
-    public async getAllProducts(req: Request, res: Response): Promise<void> {
+    async getAllProducts(req, res) {
         try {
             const products = await this.productService.getAllProducts();
             res.status(200).json(products);
@@ -17,7 +15,7 @@ class ProductController {
         }
     }
 
-    public async getProductById(req: Request, res: Response): Promise<void> {
+    async getProductById(req, res) {
         const { id } = req.params;
         try {
             const product = await this.productService.getProductById(id);
@@ -31,7 +29,7 @@ class ProductController {
         }
     }
 
-    public async filterProducts(req: Request, res: Response): Promise<void> {
+    async filterProducts(req, res) {
         const { category, attributes } = req.query;
         try {
             const filteredProducts = await this.productService.filterProducts(category, attributes);
@@ -42,4 +40,4 @@ class ProductController {
     }
 }
 
-export default ProductController;
+module.exports = ProductController;

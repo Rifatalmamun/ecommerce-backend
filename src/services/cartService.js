@@ -1,7 +1,7 @@
-import { CartModel } from '../models/cartModel';
+const { CartModel } = require('../models/cartModel');
 
-export class CartService {
-    async addItem(userId: string, productId: string, quantity: number) {
+class CartService {
+    async addItem(userId, productId, quantity) {
         const cartItem = await CartModel.findOne({ userId, productId });
         if (cartItem) {
             cartItem.quantity += quantity;
@@ -12,11 +12,11 @@ export class CartService {
         }
     }
 
-    async removeItem(userId: string, productId: string) {
+    async removeItem(userId, productId) {
         await CartModel.deleteOne({ userId, productId });
     }
 
-    async updateItem(userId: string, productId: string, quantity: number) {
+    async updateItem(userId, productId, quantity) {
         const cartItem = await CartModel.findOne({ userId, productId });
         if (cartItem) {
             cartItem.quantity = quantity;
@@ -24,7 +24,9 @@ export class CartService {
         }
     }
 
-    async getCart(userId: string) {
+    async getCart(userId) {
         return await CartModel.find({ userId }).populate('productId');
     }
 }
+
+module.exports = { CartService };

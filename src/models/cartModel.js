@@ -1,16 +1,10 @@
-export interface CartItem {
-    userId: string;
-    productId: string;
-    quantity: number;
-    totalPrice: number;
-}
+class Cart {
+    constructor(userId) {
+        this.userId = userId;
+        this.items = [];
+    }
 
-export class Cart {
-    private items: CartItem[] = [];
-
-    constructor(public userId: string) {}
-
-    addItem(productId: string, quantity: number, price: number): void {
+    addItem(productId, quantity, price) {
         const existingItem = this.items.find(item => item.productId === productId);
         if (existingItem) {
             existingItem.quantity += quantity;
@@ -20,11 +14,11 @@ export class Cart {
         }
     }
 
-    removeItem(productId: string): void {
+    removeItem(productId) {
         this.items = this.items.filter(item => item.productId !== productId);
     }
 
-    updateItem(productId: string, quantity: number, price: number): void {
+    updateItem(productId, quantity, price) {
         const existingItem = this.items.find(item => item.productId === productId);
         if (existingItem) {
             existingItem.quantity = quantity;
@@ -32,11 +26,13 @@ export class Cart {
         }
     }
 
-    getCart(): CartItem[] {
+    getCart() {
         return this.items;
     }
 
-    getTotalPrice(): number {
+    getTotalPrice() {
         return this.items.reduce((total, item) => total + item.totalPrice, 0);
     }
 }
+
+module.exports = Cart;

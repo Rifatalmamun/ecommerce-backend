@@ -1,7 +1,9 @@
-export class CartController {
-    constructor(private cartService: any) {}
+class CartController {
+    constructor(cartService) {
+        this.cartService = cartService;
+    }
 
-    async addItem(req: any, res: any) {
+    async addItem(req, res) {
         try {
             const { userId, productId, quantity } = req.body;
             const cartItem = await this.cartService.addItem(userId, productId, quantity);
@@ -11,7 +13,7 @@ export class CartController {
         }
     }
 
-    async removeItem(req: any, res: any) {
+    async removeItem(req, res) {
         try {
             const { userId, productId } = req.params;
             await this.cartService.removeItem(userId, productId);
@@ -21,7 +23,7 @@ export class CartController {
         }
     }
 
-    async updateItem(req: any, res: any) {
+    async updateItem(req, res) {
         try {
             const { userId, productId } = req.params;
             const { quantity } = req.body;
@@ -32,7 +34,7 @@ export class CartController {
         }
     }
 
-    async getCart(req: any, res: any) {
+    async getCart(req, res) {
         try {
             const { userId } = req.params;
             const cart = await this.cartService.getCart(userId);
@@ -42,3 +44,5 @@ export class CartController {
         }
     }
 }
+
+module.exports = CartController;

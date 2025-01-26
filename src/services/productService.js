@@ -1,22 +1,24 @@
-import { Product } from '../models/productModel';
+const { Product } = require('../models/productModel');
 
-export class ProductService {
-    private products: Product[] = [];
+class ProductService {
+    constructor() {
+        this.products = [];
+    }
 
-    public createProduct(product: Product): Product {
+    createProduct(product) {
         this.products.push(product);
         return product;
     }
 
-    public getAllProducts(): Product[] {
+    getAllProducts() {
         return this.products;
     }
 
-    public getProductById(id: number): Product | undefined {
+    getProductById(id) {
         return this.products.find(product => product.id === id);
     }
 
-    public updateProduct(id: number, updatedProduct: Product): Product | undefined {
+    updateProduct(id, updatedProduct) {
         const index = this.products.findIndex(product => product.id === id);
         if (index !== -1) {
             this.products[index] = { ...this.products[index], ...updatedProduct };
@@ -25,7 +27,7 @@ export class ProductService {
         return undefined;
     }
 
-    public deleteProduct(id: number): boolean {
+    deleteProduct(id) {
         const index = this.products.findIndex(product => product.id === id);
         if (index !== -1) {
             this.products.splice(index, 1);
@@ -34,3 +36,5 @@ export class ProductService {
         return false;
     }
 }
+
+module.exports = { ProductService };
