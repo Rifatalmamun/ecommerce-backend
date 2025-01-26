@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce-platform",
+  "version": "1.0.0",
+  "description": "A backend Web API for an eCommerce platform with user authentication, product management, and cart functionality.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "sequelize": "^6.6.5",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5"
+  },
+  "author": "Rifat Al Mamun",
+  "license": "MIT"
+}
